@@ -14,6 +14,10 @@ namespace main
 
         public void GeoserverTest()
         {
+        }
+
+        public void Start()
+        {
             const int numberOfRuns = 2; // redoing all requests and getting average
             const int iterationPerRun = 4; // number of times to multiply iteration by 10 (eg. 1,10,100,1000 on 4)
 
@@ -90,7 +94,7 @@ namespace main
                 var result = response.Content.ReadAsStringAsync().Result;
 //                Console.WriteLine("Response for [" + i + "]: " + result);
             });
-            
+
             if (errorCount > 0)
             {
                 Console.WriteLine("errorCount [" + dataId + "]" + errorCount);

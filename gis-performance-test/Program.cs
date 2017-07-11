@@ -4,11 +4,11 @@
     {
         private static void Main()
         {
-//            var geoServerPerformance = new GeoServerPerformance();
-//            geoServerPerformance.GeoserverTest();
+            var geoServerPerformance = new GeoServerPerformance();
+            geoServerPerformance.Start();
             
             var postGisPerformance = new PostGisPerformance();
-            
+            postGisPerformance.Start();
         }
     }
 }
