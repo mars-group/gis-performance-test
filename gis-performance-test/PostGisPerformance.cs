@@ -81,6 +81,7 @@ namespace main
                             // skip too many requests on the big file to prevent DB crash.
                             if (file.Equals("waust_tmo_2011062_geo") && requests > 10)
                             {
+                                Console.WriteLine("Skipping " + requests + ": " + file);
                                 continue;
                             }
 
