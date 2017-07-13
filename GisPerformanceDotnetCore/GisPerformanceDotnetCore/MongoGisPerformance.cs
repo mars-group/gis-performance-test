@@ -14,7 +14,6 @@ namespace GisPerformanceDotnetCore
         protected static IMongoDatabase Database;
 
         private const int NumberOfRuns = 3; // redoing all requests and getting average.
-
         private const int IterationPerRun = 4; // number of times to multiply iteration by 10 (eg. 1,10,100,1000 on 4)
 
         public void Start()

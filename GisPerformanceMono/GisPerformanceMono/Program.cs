@@ -1,43 +1,25 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using System.IO;
-using DotSpatial.Data;
 
 
 namespace GisPerformanceMono
 {
     internal class Program
     {
-        private static readonly string Shape = Path.Combine("res", "TM_WORLD_BORDERS", "TM_WORLD_BORDERS.shp");
+        private const int NumberOfRuns = 3; // redoing all requests and getting average.
+        private const int IterationPerRun = 4; // number of times to multiply iteration by 10 (eg. 1,10,100,1000 on 4)
 
         public static void Main(string[] args)
         {
-            ReadShp(Shape);
-        }
-
-        private static void ReadShp(string path)
-        {
-            Console.WriteLine(path);
-            if (!File.Exists(path))
+            var vectorFiles = new List<string>
             {
-                Console.WriteLine("File does not exist!");
-                return;
-            }
+                Path.Combine("res", "points", "points.shp"),
+                Path.Combine("res", "TM_WORLD_BORDERS", "TM_WORLD_BORDERS.shp"),
+                Path.Combine("res", "BLMAdminBoundaries", "BLMAdminBoundaries.shp")
+            };
 
-            var sf = Shapefile.OpenFile(path);
-//            sf.Reproject(DotSpatial.Projections.KnownCoordinateSystems.Geographic.World.WGS1984);
-
-            var rnd = new Random();
-
-            var featureId = rnd.Next(sf.Features.Count - 1);
-            
-            var watch = System.Diagnostics.Stopwatch.StartNew();
-            
-            var feature = sf.Features[featureId];
-
-            var geometry = feature.Geometry;
-//            Console.WriteLine(geometry);
-
-            Console.WriteLine(watch.ElapsedMilliseconds);
+            var dotSpatialPerformance = new DotSpatialPerformance(vectorFiles);
+            dotSpatialPerformance.Start(NumberOfRuns, IterationPerRun);
         }
     }
 }
