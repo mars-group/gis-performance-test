@@ -66,7 +66,7 @@ namespace DotSpatial
 
             var numberOfFeatures = sf.Features.Count;
 
-            Parallel.For(0, requests - 1, index => { ids[index] = _rnd.Next(numberOfFeatures); });
+            Parallel.For(0, requests, index => { ids[index] = _rnd.Next(numberOfFeatures); });
 
             var watch = System.Diagnostics.Stopwatch.StartNew();
 
