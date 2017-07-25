@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.0.0
 MinimumVisualStudioVersion = 10.0.0.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GisPerformanceMono", "GisPerformanceMono/GisPerformanceMono.csproj", "{A52F868A-B664-4AC6-BE76-57B393A78263}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotSpatial", "DotSpatial\DotSpatial.csproj", "{A52F868A-B664-4AC6-BE76-57B393A78263}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetTopologySuite", "DotNetTopologySuite\DotNetTopologySuite.csproj", "{5C097CE9-9C77-428F-B400-7B45F5057729}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{A52F868A-B664-4AC6-BE76-57B393A78263}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A52F868A-B664-4AC6-BE76-57B393A78263}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A52F868A-B664-4AC6-BE76-57B393A78263}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C097CE9-9C77-428F-B400-7B45F5057729}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C097CE9-9C77-428F-B400-7B45F5057729}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C097CE9-9C77-428F-B400-7B45F5057729}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C097CE9-9C77-428F-B400-7B45F5057729}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
