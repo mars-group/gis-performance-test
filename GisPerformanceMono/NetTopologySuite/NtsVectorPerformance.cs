@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using NetTopologySuite.Geometries;
 using NetTopologySuite.IO;
 
-namespace DotNetTopologySuite
+namespace NetTopologySuite
 {
     public class NtsVectorPerformance
     {
@@ -14,39 +14,34 @@ namespace DotNetTopologySuite
 
         public NtsVectorPerformance(List<string> files)
         {
-            _rnd = new Random();
             _files = files;
+            _rnd = new Random();
         }
 
-        public void Start(int numberOfRuns, int iterationPerRun)
+        public void TestPerformance(int numberOfRuns, int iterationPerRun)
         {
             var timeElapsed = _files.ToDictionary(dataId => dataId, dataId => new double[iterationPerRun]);
 
-            // call one file before performance messurement starts
-            foreach (var file in _files)
-            {
-//                Thread.Sleep(100);
-                GetRandomVectorValue(file, 1);
-            }
-
-            // test performance
+            // Test performance
             for (var run = 0; run < numberOfRuns; run++)
             {
                 Console.WriteLine("\nRun " + (run + 1) + " started!");
                 var requests = 1;
                 for (var iterration = 0; iterration < iterationPerRun; iterration++)
                 {
+                    GC.Collect();
+                    GC.WaitForPendingFinalizers();
+
+                    Console.WriteLine(requests + " request(s) started.");
                     foreach (var file in _files)
                     {
-//                        Thread.Sleep(2000);
-                        Console.WriteLine(requests + " request(s) started: " + file);
                         timeElapsed[file][iterration] += GetRandomVectorValue(file, requests);
                     }
                     requests *= 10;
                 }
             }
 
-            // calculate average
+            // Calculate average
             foreach (var file in _files)
             {
                 var read = 1;
@@ -61,28 +56,29 @@ namespace DotNetTopologySuite
 
         private double GetRandomVectorValue(string file, int requests)
         {
-            var reader = new ShapefileReader(file);
+            var featureIds = new int[requests];
             var dataReader = new ShapefileDataReader(file, new GeometryFactory());
 
-            var ids = new int[requests];
-
             var numberOfFeatures = dataReader.RecordCount;
+            Parallel.For(0, requests, index => { featureIds[index] = _rnd.Next(numberOfFeatures); });
 
-            Parallel.For(0, requests, index => { ids[index] = _rnd.Next(numberOfFeatures); });
-
-            var allFeatures = reader.ReadAll();
+            // Close the file and reopen after messurement has started
+            dataReader.Close();
+            dataReader.Dispose();
 
             var watch = System.Diagnostics.Stopwatch.StartNew();
 
-            foreach (var id in ids)
+            var reader = new ShapefileReader(file);
+            var allFeatures = reader.ReadAll();
+
+            Parallel.ForEach(featureIds, id =>
             {
-                var feature = allFeatures.Geometries[id];
-//                Console.WriteLine(feature);
-            }
+                var feature = allFeatures[id];
+//                var result = feature;
+//                Console.WriteLine(result);
+            });
 
-            var elapsedTime = watch.Elapsed.Ticks;
-
-            return (double) elapsedTime / TimeSpan.TicksPerMillisecond;
+            return watch.Elapsed.Milliseconds;
         }
     }
 }

@@ -1,7 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 
-namespace DotNetTopologySuite
+namespace NetTopologySuite
 {
     internal class Program
     {
@@ -10,15 +11,16 @@ namespace DotNetTopologySuite
 
         public static void Main(string[] args)
         {
+            Console.WriteLine("NetTopologySuite performance:");
+            
             var vectorFiles = new List<string>
             {
                 Path.Combine("res", "points", "points.shp"),
                 Path.Combine("res", "TM_WORLD_BORDERS", "TM_WORLD_BORDERS.shp"),
                 Path.Combine("res", "BLMAdminBoundaries", "BLMAdminBoundaries.shp")
             };
-
             var ntsPerformance = new NtsVectorPerformance(vectorFiles);
-            ntsPerformance.Start(NumberOfRuns, IterationPerRun);
+            ntsPerformance.TestPerformance(NumberOfRuns, IterationPerRun);
         }
     }
 }

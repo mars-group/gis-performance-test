@@ -8,8 +8,8 @@
     <ProjectTypeGuids>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DotNetTopologySuite</RootNamespace>
-    <AssemblyName>DotNetTopologySuite</AssemblyName>
+    <RootNamespace>NetTopologySuite</RootNamespace>
+    <AssemblyName>NetTopologySuite</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -74,9 +74,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="res\geotiff.tif">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="res\points\points.dbf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

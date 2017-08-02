@@ -5,7 +5,7 @@ VisualStudioVersion = 12.0.0.0
 MinimumVisualStudioVersion = 10.0.0.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotSpatial", "DotSpatial\DotSpatial.csproj", "{A52F868A-B664-4AC6-BE76-57B393A78263}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetTopologySuite", "DotNetTopologySuite\DotNetTopologySuite.csproj", "{5C097CE9-9C77-428F-B400-7B45F5057729}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetTopologySuite", "NetTopologySuite\NetTopologySuite.csproj", "{5C097CE9-9C77-428F-B400-7B45F5057729}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

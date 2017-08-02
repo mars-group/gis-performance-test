@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using DotSpatial.Data;
+using DotSpatial.Data.Rasters.GdalExtension;
 
 namespace DotSpatial
 {
@@ -31,12 +33,13 @@ namespace DotSpatial
                 var requests = 1;
                 for (var iterration = 0; iterration < iterationPerRun; iterration++)
                 {
+                    GC.Collect();
+                    GC.WaitForPendingFinalizers();
+
+                    Console.WriteLine(requests + " request(s) started.");
                     foreach (var file in _files)
                     {
-                        Console.WriteLine(requests + " request(s) started: " + file);
                         timeElapsed[file][iterration] += GetRandomValue(file, requests);
-                        GC.Collect();
-                        GC.WaitForPendingFinalizers();
                     }
                     requests *= 10;
                 }
@@ -70,12 +73,11 @@ namespace DotSpatial
             {
                 Parallel.For(0, requests,
                     index => { pixels[index] = new Point(_rnd.Next(raster.Width), _rnd.Next(raster.Height)); });
-
-                // Close the file and reopen after messurement has started
             }
 
+            // Close the file and reopen after messurement has started
+
             var watch = System.Diagnostics.Stopwatch.StartNew();
-            int elapsedTime;
 
             using (var raster = ImageData.Open(file))
             {
@@ -84,16 +86,15 @@ namespace DotSpatial
                     var color = raster.GetColor(pixel.Y, pixel.X);
 //                    Console.WriteLine(color);
                 });
-
-                elapsedTime = watch.Elapsed.Milliseconds;
             }
 
-            return elapsedTime;
+            return watch.Elapsed.Milliseconds;
         }
 
         private double GetRandomVectorValue(string file, int requests)
         {
             var featureIds = new int[requests];
+
             using (var shapefile = Shapefile.OpenFile(file))
             {
                 var numberOfFeatures = shapefile.Features.Count;
@@ -103,7 +104,6 @@ namespace DotSpatial
             // Close the file and reopen after messurement has started
 
             var watch = System.Diagnostics.Stopwatch.StartNew();
-            int elapsedTime;
 
             using (var shapefile = Shapefile.OpenFile(file))
             {
@@ -113,11 +113,9 @@ namespace DotSpatial
                     var geometry = feature.Geometry;
 //                    Console.WriteLine(geometry);
                 });
-
-                elapsedTime = watch.Elapsed.Milliseconds;
             }
 
-            return elapsedTime;
+            return watch.Elapsed.Milliseconds;
         }
     }
 }
