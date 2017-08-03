@@ -1,13 +1,16 @@
-﻿<Properties StartupConfiguration="{A52F868A-B664-4AC6-BE76-57B393A78263}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="DotSpatial/DotSpatialRasterPerformance.cs">
+﻿<Properties StartupConfiguration="{5C097CE9-9C77-428F-B400-7B45F5057729}|Default">
+  <MonoDevelop.Ide.ItemProperties.NetTopologySuite PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="DotSpatial/DotSpatialPerformance.cs">
     <Files>
-      <File FileName="DotSpatial/DotSpatialRasterPerformance.cs" Line="92" Column="8" />
+      <File FileName="DotSpatial/DotSpatialPerformance.cs" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="GisPerformanceMono" expanded="True">
-            <Node name="DotSpatial" selected="True" />
+            <Node name="DotSpatial" expanded="True">
+              <Node name="References" expanded="True" />
+            </Node>
           </Node>
         </State>
       </Pad>
@@ -18,6 +21,5 @@
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.ItemProperties.DotSpatial PreferredExecutionTarget="MonoDevelop.Default" />
   <MultiItemStartupConfigurations />
 </Properties>

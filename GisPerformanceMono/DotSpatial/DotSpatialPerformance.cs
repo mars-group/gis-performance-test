@@ -2,10 +2,8 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 using DotSpatial.Data;
-using DotSpatial.Data.Rasters.GdalExtension;
 
 namespace DotSpatial
 {
@@ -79,6 +77,11 @@ namespace DotSpatial
 
             var watch = System.Diagnostics.Stopwatch.StartNew();
 
+            // ToDo: Make this line work to allow reading GeoTiff with Raster.Open().
+            // blocked by: https://github.com/DotSpatial/DotSpatial/issues/901
+//            GdalConfiguration.ConfigureGdal();
+            
+//            using (var raster = Raster.Open(file))
             using (var raster = ImageData.Open(file))
             {
                 Parallel.ForEach(pixels, pixel =>
