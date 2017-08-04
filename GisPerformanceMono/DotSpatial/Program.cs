@@ -24,8 +24,7 @@ namespace DotSpatial
 //            var vectorFiles = new List<string>
 //            {
 //                Path.Combine("res", "points", "points.shp"),
-//                Path.Combine("res", "TM_WORLD_BORDERS", "TM_WORLD_BORDERS.shp"),
-//                Path.Combine("res", "BLMAdminBoundaries", "BLMAdminBoundaries.shp")
+//                Path.Combine("res", "TM_WORLD_BORDERS", "TM_WORLD_BORDERS.shp")
 //            };
 //            var vectorPerformance = new DotSpatialPerformance(vectorFiles, GisType.Vector);
 //            vectorPerformance.TestPerformance(NumberOfRuns, IterationPerRun);

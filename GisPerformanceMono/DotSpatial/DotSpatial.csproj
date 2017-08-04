@@ -64,22 +64,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <None Include="res\BLMAdminBoundaries\.DS_Store" />
-    <None Include="res\BLMAdminBoundaries\BLMAdminBoundaries.dbf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="res\BLMAdminBoundaries\BLMAdminBoundaries.prj">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="res\BLMAdminBoundaries\BLMAdminBoundaries.qpj">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="res\BLMAdminBoundaries\BLMAdminBoundaries.shp">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="res\BLMAdminBoundaries\BLMAdminBoundaries.shx">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Include="res\lakes_raster_z0.tif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
