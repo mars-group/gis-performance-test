@@ -16,8 +16,7 @@ namespace DotSpatial
             var rasterFiles = new List<string>
             {
                 Path.Combine("res", "lakes_raster_z0.tif"),
-                Path.Combine("res", "TerrametricsStd_GeoTiff.tif"),
-                Path.Combine("res", "waust_tmo_2011062_geo.tif")
+                Path.Combine("res", "TerrametricsStd_GeoTiff.tif")
             };
             var rasterPerformance = new DotSpatialPerformance(rasterFiles, GisType.Raster);
             rasterPerformance.TestPerformance(NumberOfRuns, IterationPerRun);

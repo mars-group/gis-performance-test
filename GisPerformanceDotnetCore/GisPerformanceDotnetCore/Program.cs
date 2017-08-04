@@ -35,7 +35,6 @@ namespace GisPerformanceDotnetCore
         private static readonly List<string> AsciiFiles = new List<string>
         {
             Path.Combine("res", "ascii_grid.asc"),
-            Path.Combine("res", "knp_srtm90m.asc")
         };
 
         static void Main()

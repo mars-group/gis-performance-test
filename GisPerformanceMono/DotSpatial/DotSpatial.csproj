@@ -86,9 +86,6 @@
     <None Include="res\TerrametricsStd_GeoTiff.tif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="res\waust_tmo_2011062_geo.tif">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="res\points\points.dbf">
