@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace GisPerformanceDotnetCore
 {
-    public class EsriAscii
+    public class EsriAsciiParser
     {
         public int NumberOfColumns { get; }
 
@@ -21,7 +21,7 @@ namespace GisPerformanceDotnetCore
         public int[][] Data { get; }
 
 
-        public EsriAscii(string path)
+        public EsriAsciiParser(string path)
         {
             using (var file = File.OpenText(path))
             {
@@ -62,7 +62,7 @@ namespace GisPerformanceDotnetCore
             }
         }
 
-        public int GetValue(double lng, double lat)
+        public int GetValueFromGps(double lng, double lat)
         {
             if (lng < XLowerLeftCorner || lng > XLowerLeftCorner + NumberOfColumns * CellSize ||
                 lat < YLowerLeftCorner || lat > YLowerLeftCorner + NumberOfRows * CellSize)
@@ -73,7 +73,17 @@ namespace GisPerformanceDotnetCore
             var xIndex = (int) ((lng - XLowerLeftCorner) / CellSize);
             var yIndex = (int) ((lat - YLowerLeftCorner) / CellSize);
 
-            return Data[xIndex][yIndex];
+            return GetValue(xIndex, yIndex);
+        }
+
+        public int GetValue(int x, int y)
+        {
+            if (x < 0 || x >= NumberOfColumns || y < 0 || y >= NumberOfRows)
+            {
+                return -9999;
+            }
+
+            return Data[x][y];
         }
 
         public string GetMetadata()
