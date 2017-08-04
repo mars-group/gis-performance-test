@@ -7,4 +7,9 @@
     <PackageReference Include="MongoDB.Driver" Version="2.4.4" />
     <PackageReference Include="Npgsql" Version="3.2.4.1" />
   </ItemGroup>
+  <ItemGroup>
+    <None Update="res\ascii_grid.asc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 </Project>
