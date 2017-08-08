@@ -2,7 +2,7 @@
 using System.IO;
 using System.Linq;
 
-namespace GisPerformanceDotnetCore
+namespace GisPerformanceDotnetCore.tools
 {
     public class EsriAsciiParser
     {

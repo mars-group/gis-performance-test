@@ -1,0 +1,10 @@
+﻿<Properties StartupConfiguration="{1039D0A8-3D5D-46DD-B64D-29FE89FEC502}|Default">
+  <MonoDevelop.Ide.ItemProperties.GisPerformanceDotnetCore PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MultiItemStartupConfigurations />
+</Properties>

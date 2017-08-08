@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using GisPerformanceDotnetCore.tools;
 
 namespace GisPerformanceDotnetCore
 {
@@ -39,6 +41,9 @@ namespace GisPerformanceDotnetCore
 
         static void Main()
         {
+            var distance = new Coordinates(15.695585, 48.672309).DistanceTo(new Coordinates(16.389477, 48.237867));
+            Console.WriteLine(distance + "km");
+
             var geoServerPerformance = new PerformanceBenchmark(GeoServerDataIds, GisType.GeoServer);
             geoServerPerformance.TestPerformance(NumberOfRuns, IterationPerRun);
 

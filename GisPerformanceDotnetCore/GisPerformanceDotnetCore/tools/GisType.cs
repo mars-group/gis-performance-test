@@ -1,4 +1,4 @@
-﻿namespace GisPerformanceDotnetCore
+﻿namespace GisPerformanceDotnetCore.tools
 {
     public enum GisType
     {
