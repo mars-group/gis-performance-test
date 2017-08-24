@@ -27,21 +27,21 @@ namespace GisPerformanceDotnetCore
             _rnd = new Random();
         }
 
-        public void TestPerformance(int numberOfRuns, int iterationPerRun)
+        public void TestPerformance(int initialNumberOfRuns, int numberOfRuns, int iterationPerRun)
         {
             var timeElapsed = _files.ToDictionary(dataId => dataId, dataId => new double[iterationPerRun]);
 
             // Test performance
             for (var run = 0; run < numberOfRuns; run++)
             {
-                Console.WriteLine("\nRun " + (run + 1) + " started!");
-                var requests = 1;
+//                Console.WriteLine("\nRun " + (run + 1) + " started!");
+                var requests = initialNumberOfRuns;
                 for (var iterration = 0; iterration < iterationPerRun; iterration++)
                 {
                     GC.Collect();
                     GC.WaitForPendingFinalizers();
 
-                    Console.WriteLine(requests + " request(s) started.");
+                    Console.WriteLine(requests + " request(s) started. (" + _gisType + ")");
                     foreach (var file in _files)
                     {
                         switch (_gisType)
@@ -55,6 +55,7 @@ namespace GisPerformanceDotnetCore
                                 timeElapsed[file][iterration] += GetRandomMongoDbValue(file, requests);
                                 break;
                             case GisType.PostgisRaster:
+                                Thread.Sleep(2000);
                                 timeElapsed[file][iterration] += GetRandomPostGisRasterValue(file, requests);
                                 break;
                             case GisType.PostGisVector:
@@ -74,8 +75,8 @@ namespace GisPerformanceDotnetCore
             // Calculate average
             foreach (var file in _files)
             {
-                var read = 1;
-                Console.WriteLine("\n" + file + ":");
+                var read = initialNumberOfRuns;
+                Console.WriteLine("\n" + file + ":(" + _gisType + ")");
                 for (var iterration = 0; iterration < iterationPerRun; iterration++)
                 {
                     Console.WriteLine(read + " reads took: " + timeElapsed[file][iterration] / numberOfRuns + " ms");
@@ -98,7 +99,9 @@ namespace GisPerformanceDotnetCore
 
             Parallel.For(0, requests, i =>
             {
-                var response = client.GetAsync("value?dataId=" + file + "&lon=10.0&lat=10.0").Result;
+//                var request = "value?dataId=" + file + "&lon=10.0&lat=10.0";
+                var request = "value?dataId=" + file + "&lon=-37.70248&lat=-89.9990";
+                var response = client.GetAsync(request).Result;
 
                 if (!response.IsSuccessStatusCode)
                 {
@@ -126,7 +129,8 @@ namespace GisPerformanceDotnetCore
 
             // ToDo: randomize query
 
-            var filter = Builders<BsonDocument>.Filter.Eq("properties.NAME", "Germany");
+//            var filter = Builders<BsonDocument>.Filter.Eq("properties.NAME", "Germany");
+            var filter = Builders<BsonDocument>.Filter.Eq("properties.OBJECTID", 1);
 
             var watch = System.Diagnostics.Stopwatch.StartNew();
 
@@ -182,7 +186,7 @@ namespace GisPerformanceDotnetCore
 
             var watch = System.Diagnostics.Stopwatch.StartNew();
 
-            Parallel.For(0, requests, index =>
+            Parallel.For(0, requests, new ParallelOptions { MaxDegreeOfParallelism = 7 }, index =>
             {
                 using (var conn = new NpgsqlConnection(PostGisConnString))
                 {

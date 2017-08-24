@@ -20,7 +20,7 @@ namespace DotSpatial
             _rnd = new Random();
         }
 
-        public void TestPerformance(int numberOfRuns, int iterationPerRun)
+        public void TestPerformance(int initialNumberOfRuns, int numberOfRuns, int iterationPerRun)
         {
             var timeElapsed = _files.ToDictionary(dataId => dataId, dataId => new double[iterationPerRun]);
 
@@ -28,7 +28,7 @@ namespace DotSpatial
             for (var run = 0; run < numberOfRuns; run++)
             {
                 Console.WriteLine("\nRun " + (run + 1) + " started!");
-                var requests = 1;
+                var requests = initialNumberOfRuns;
                 for (var iterration = 0; iterration < iterationPerRun; iterration++)
                 {
                     GC.Collect();
@@ -46,7 +46,7 @@ namespace DotSpatial
             // Calculate average
             foreach (var file in _files)
             {
-                var read = 1;
+                var read = initialNumberOfRuns;
                 Console.WriteLine("\n" + file + ":");
                 for (var iterration = 0; iterration < iterationPerRun; iterration++)
                 {
@@ -69,8 +69,10 @@ namespace DotSpatial
 
             using (var raster = ImageData.Open(file))
             {
+                var width = raster.Width;
+                var height = raster.Height;
                 Parallel.For(0, requests,
-                    index => { pixels[index] = new Point(_rnd.Next(raster.Width), _rnd.Next(raster.Height)); });
+                    index => { pixels[index] = new Point(_rnd.Next(width), _rnd.Next(height)); });
             }
 
             // Close the file and reopen after messurement has started
@@ -82,8 +84,9 @@ namespace DotSpatial
 //            GdalConfiguration.ConfigureGdal();
             
 //            using (var raster = Raster.Open(file))
-            using (var raster = ImageData.Open(file))
+            using (var rasterFile = ImageData.Open(file))
             {
+                var raster = rasterFile;
                 Parallel.ForEach(pixels, pixel =>
                 {
                     var color = raster.GetColor(pixel.Y, pixel.X);
@@ -110,9 +113,10 @@ namespace DotSpatial
 
             using (var shapefile = Shapefile.OpenFile(file))
             {
+                var shp = shapefile;
                 Parallel.ForEach(featureIds, id =>
                 {
-                    var feature = shapefile.GetFeature(id);
+                    var feature = shp.GetFeature(id);
                     var geometry = feature.Geometry;
 //                    Console.WriteLine(geometry);
                 });

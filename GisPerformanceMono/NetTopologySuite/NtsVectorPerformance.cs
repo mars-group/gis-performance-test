@@ -18,7 +18,7 @@ namespace NetTopologySuite
             _rnd = new Random();
         }
 
-        public void TestPerformance(int numberOfRuns, int iterationPerRun)
+        public void TestPerformance(int initialNumberOfRuns, int numberOfRuns, int iterationPerRun)
         {
             var timeElapsed = _files.ToDictionary(dataId => dataId, dataId => new double[iterationPerRun]);
 
@@ -26,7 +26,7 @@ namespace NetTopologySuite
             for (var run = 0; run < numberOfRuns; run++)
             {
                 Console.WriteLine("\nRun " + (run + 1) + " started!");
-                var requests = 1;
+                var requests = initialNumberOfRuns;
                 for (var iterration = 0; iterration < iterationPerRun; iterration++)
                 {
                     GC.Collect();
@@ -44,7 +44,7 @@ namespace NetTopologySuite
             // Calculate average
             foreach (var file in _files)
             {
-                var read = 1;
+                var read = initialNumberOfRuns;
                 Console.WriteLine("\n" + file + ":");
                 for (var iterration = 0; iterration < iterationPerRun; iterration++)
                 {

@@ -2,3 +2,8 @@
 bin/
 obj/
 packages/
+BLMAdminBoundaries/
+waust_tmo_2011062_geo.tif
+raster_small.asc
+raster_mid.asc
+raster_big.asc

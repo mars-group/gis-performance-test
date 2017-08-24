@@ -2,19 +2,8 @@
   <MonoDevelop.Ide.ItemProperties.NetTopologySuite PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.Workbench ActiveDocument="DotSpatial/DotSpatialPerformance.cs">
     <Files>
-      <File FileName="DotSpatial/DotSpatialPerformance.cs" Line="1" Column="1" />
+      <File FileName="DotSpatial/DotSpatialPerformance.cs" Line="6" Column="23" />
     </Files>
-    <Pads>
-      <Pad Id="ProjectPad">
-        <State name="__root__">
-          <Node name="GisPerformanceMono" expanded="True">
-            <Node name="DotSpatial" expanded="True">
-              <Node name="References" expanded="True" />
-            </Node>
-          </Node>
-        </State>
-      </Pad>
-    </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

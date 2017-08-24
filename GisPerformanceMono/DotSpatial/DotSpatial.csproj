@@ -42,11 +42,20 @@
     <Reference Include="DotSpatial.GeoAPI, Version=1.7.4.0, Culture=neutral, PublicKeyToken=a1a0da7def465678">
       <HintPath>..\packages\DotSpatial.GeoAPI.1.7.4.3\lib\net40-client\DotSpatial.GeoAPI.dll</HintPath>
     </Reference>
+    <Reference Include="DotSpatial.GeoAPI, Version=1.7.4.0, Culture=neutral, PublicKeyToken=a1a0da7def465678">
+      <HintPath>..\packages\DotSpatial.GeoAPI.1.7.4.3\lib\net40-client\DotSpatial.GeoAPI.dll</HintPath>
+    </Reference>
+    <Reference Include="DotSpatial.NetTopologySuite, Version=1.14.4.0, Culture=neutral, PublicKeyToken=f580a05016ebada1">
+      <HintPath>..\packages\DotSpatial.NetTopologySuite.1.14.4\lib\net40-client\DotSpatial.NetTopologySuite.dll</HintPath>
+    </Reference>
     <Reference Include="DotSpatial.Projections, Version=2.0.0.0, Culture=neutral, PublicKeyToken=272632bddd08a38b">
       <HintPath>..\packages\DotSpatial.Projections.2.0.0-rc1\lib\net40-client\DotSpatial.Projections.dll</HintPath>
     </Reference>
     <Reference Include="DotSpatial.Serialization, Version=2.0.0.0, Culture=neutral, PublicKeyToken=441f200f827611e7">
       <HintPath>..\packages\DotSpatial.Serialization.2.0.0-rc1\lib\net40-client\DotSpatial.Serialization.dll</HintPath>
+    </Reference>
+    <Reference Include="GeoAPI, Version=1.7.5.0, Culture=neutral, PublicKeyToken=a1a0da7def465678">
+      <HintPath>..\packages\GeoAPI.1.7.5-pre2\lib\net45\GeoAPI.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -68,6 +77,21 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="res\TerrametricsStd_GeoTiff.tif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="res\BLMAdminBoundaries\BLMAdminBoundaries.dbf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="res\BLMAdminBoundaries\BLMAdminBoundaries.prj">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="res\BLMAdminBoundaries\BLMAdminBoundaries.shp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="res\BLMAdminBoundaries\BLMAdminBoundaries.shx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="res\waust_tmo_2011062_geo.tif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
