@@ -66,9 +66,9 @@ namespace NetTopologySuite
             dataReader.Close();
             dataReader.Dispose();
 
-            var watch = System.Diagnostics.Stopwatch.StartNew();
 
             var reader = new ShapefileReader(file);
+            var watch = System.Diagnostics.Stopwatch.StartNew();
             var allFeatures = reader.ReadAll();
 
             Parallel.ForEach(featureIds, id =>

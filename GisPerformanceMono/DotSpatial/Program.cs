@@ -6,9 +6,9 @@ namespace DotSpatial
 {
     public class Program
     {
-        private const int InitialNumberOfRuns = 1000; // redoing all requests and getting average.
+        private const int InitialNumberOfRuns = 100; // redoing all requests and getting average.
         private const int NumberOfRuns = 3; // redoing all requests and getting average.
-        private const int IterationPerRun = 1; // number of times to multiply iteration by 10 (eg. 1,10,100,1000 on 4)
+        private const int IterationPerRun = 3; // number of times to multiply iteration by 10 (eg. 1,10,100,1000 on 4)
 
         public static void Main(string[] args)
         {

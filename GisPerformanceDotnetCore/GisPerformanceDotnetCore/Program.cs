@@ -7,9 +7,9 @@ namespace GisPerformanceDotnetCore
 {
     class Program
     {
-        private const int InitialNumberOfRuns = 1000; // redoing all requests and getting average.
-        private const int NumberOfRuns = 1; // redoing all requests and getting average.
-        private const int IterationPerRun = 1; // number of times to multiply iteration by 10 (eg. 1,10,100,1000 on 4)
+        private const int InitialNumberOfRuns = 100; // redoing all requests and getting average.
+        private const int NumberOfRuns = 3; // redoing all requests and getting average.
+        private const int IterationPerRun = 3; // number of times to multiply iteration by 10 (eg. 1,10,100,1000 on 4)
 
         private static readonly List<string> GeoServerDataIds = new List<string>
         {
@@ -24,7 +24,7 @@ namespace GisPerformanceDotnetCore
 
         private static readonly List<string> MongoDbVectorFiles = new List<string>
         {
-            "points2", //warmup
+//            "points2", //warmup
             "points",
             "TM_WORLD_BORDERS",
             "BLMAdminBoundaries"
@@ -32,10 +32,10 @@ namespace GisPerformanceDotnetCore
 
         private static readonly List<string> PostGisRasterFiles = new List<string>
         {
-//            "lakes_raster_z02", //warmup
-//            "lakes_raster_z0",
-//            "Terrametricsstd_geotiff",
-            "waust_tmo_2011062_geo"
+            "lakes_raster_z02", //warmup
+            "lakes_raster_z0",
+            "Terrametricsstd_geotiff",
+//            "waust_tmo_2011062_geo"
         };
 
         private static readonly List<string> PostGisVectorFiles = new List<string>

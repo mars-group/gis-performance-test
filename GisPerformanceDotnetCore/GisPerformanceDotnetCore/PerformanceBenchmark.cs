@@ -18,7 +18,7 @@ namespace GisPerformanceDotnetCore
         private readonly GisType _gisType;
         private readonly Random _rnd;
         private const string PostGisConnString = "Host=localhost;Username=postgres;Password=postgres;Database=postgres";
-        private const string GeoServerConnString = "http://192.168.64.3:30083/gis/";
+        private const string GeoServerConnString = "http://192.168.64.4:30083/gis/";
 
         public PerformanceBenchmark(List<string> files, GisType gisType)
         {
@@ -99,8 +99,7 @@ namespace GisPerformanceDotnetCore
 
             Parallel.For(0, requests, i =>
             {
-//                var request = "value?dataId=" + file + "&lon=10.0&lat=10.0";
-                var request = "value?dataId=" + file + "&lon=-37.70248&lat=-89.9990";
+                var request = "value?dataId=" + file + "&lon=120&lat=-15";
                 var response = client.GetAsync(request).Result;
 
                 if (!response.IsSuccessStatusCode)
@@ -122,6 +121,8 @@ namespace GisPerformanceDotnetCore
 
         private double GetRandomMongoDbValue(string file, int requests)
         {
+            var watch = System.Diagnostics.Stopwatch.StartNew();
+            
             var client = new MongoClient();
             var database = client.GetDatabase("gis");
 
@@ -132,7 +133,6 @@ namespace GisPerformanceDotnetCore
 //            var filter = Builders<BsonDocument>.Filter.Eq("properties.NAME", "Germany");
             var filter = Builders<BsonDocument>.Filter.Eq("properties.OBJECTID", 1);
 
-            var watch = System.Diagnostics.Stopwatch.StartNew();
 
             Parallel.For(0, requests, index =>
             {
@@ -186,7 +186,8 @@ namespace GisPerformanceDotnetCore
 
             var watch = System.Diagnostics.Stopwatch.StartNew();
 
-            Parallel.For(0, requests, new ParallelOptions { MaxDegreeOfParallelism = 7 }, index =>
+            Parallel.For(0, requests, new ParallelOptions {MaxDegreeOfParallelism = 7}, index =>
+//            Parallel.For(0, requests, index =>
             {
                 using (var conn = new NpgsqlConnection(PostGisConnString))
                 {
