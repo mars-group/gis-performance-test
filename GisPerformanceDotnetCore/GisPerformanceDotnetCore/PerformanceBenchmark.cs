@@ -5,7 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using GisPerformanceDotnetCore.tools;
+using GisPerformanceDotnetCore.util;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using Npgsql;
@@ -220,23 +220,24 @@ namespace GisPerformanceDotnetCore
 
         private double GetRandomEsriAsciiValue(string file, int requests)
         {
-            var pixels = new Point[requests];
-            var asc = new EsriAsciiParser(file);
+            var pixels = new Coordinate[requests];
+            var asc = new AsciiGridParser(file);
 
             var width = asc.NumberOfColumns;
             var height = asc.NumberOfRows;
 
             Parallel.For((long) 0, requests,
-                index => { pixels[index] = new Point(_rnd.Next(width), _rnd.Next(height)); });
+                index => { pixels[index] = new Coordinate(_rnd.Next(width), _rnd.Next(height)); });
 
             // Close the file and reopen after messurement has started
 
             var watch = System.Diagnostics.Stopwatch.StartNew();
 
-            asc = new EsriAsciiParser(file);
+            asc = new AsciiGridParser(file);
             Parallel.ForEach(pixels, pixel =>
             {
-                var value = asc.GetValue(pixel.X, pixel.Y);
+                var coord = new Coordinate(pixel.Y, pixel.X);
+                var value = asc.GetValue(coord);
 //                    Console.WriteLine(value);
             });
 

@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using GisRasterLayer.util;
 
-namespace GisRasterLayer
+namespace GisPerformanceDotnetCore.util
 {
     public class AsciiGridParser
     {
@@ -20,7 +18,7 @@ namespace GisRasterLayer
 
         public int NoDataValue { get; set; }
 
-        public IDictionary<Tuple<int, int>, double> Data { get; set; }
+        public double[,] Data { get; set; }
 
 
         /// <summary>
@@ -49,9 +47,7 @@ namespace GisRasterLayer
                 return NoDataValue;
             }
 
-            var tuple = new Tuple<int, int>(coord.Y, coord.X);
-
-            return Data.TryGetValue(tuple, out double value) ? value : NoDataValue;
+            return Data[coord.Y, coord.X];
         }
 
         /// <summary>
@@ -163,7 +159,7 @@ namespace GisRasterLayer
                 ParseMetadata(file);
             }
 
-            Data = new Dictionary<Tuple<int, int>, double>();
+            Data = new double[NumberOfRows, NumberOfColumns];
 
             for (var row = 0; row < NumberOfRows; row++)
             {
@@ -174,11 +170,7 @@ namespace GisRasterLayer
 
                 for (var column = 0; column < NumberOfColumns; column++)
                 {
-                    var tuple = new Tuple<int, int>(row, column);
-                    if (Math.Abs(line[column] - NoDataValue) > 0.00001)
-                    {
-                        Data.Add(tuple, line[column]);
-                    }
+                    Data[row, column] = line[column];
                 }
             }
         }

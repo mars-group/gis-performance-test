@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using GisPerformanceDotnetCore.tools;
+using GisPerformanceDotnetCore.util;
 
 namespace GisPerformanceDotnetCore
 {
@@ -9,7 +9,7 @@ namespace GisPerformanceDotnetCore
     {
         private const int InitialNumberOfRuns = 100; // redoing all requests and getting average.
         private const int NumberOfRuns = 3; // redoing all requests and getting average.
-        private const int IterationPerRun = 3; // number of times to multiply iteration by 10 (eg. 1,10,100,1000 on 4)
+        private const int IterationPerRun = 2; // number of times to multiply iteration by 10 (eg. 1,10,100,1000 on 4)
 
         private static readonly List<string> GeoServerDataIds = new List<string>
         {
@@ -51,7 +51,7 @@ namespace GisPerformanceDotnetCore
             Path.Combine("res", "ascii_grid.asc"), //warmup
             Path.Combine("res", "raster_small.asc"),
             Path.Combine("res", "raster_mid.asc"),
-            Path.Combine("res", "raster_big.asc")
+//            Path.Combine("res", "raster_big.asc")
         };
 
         static void Main()
@@ -60,7 +60,7 @@ namespace GisPerformanceDotnetCore
 //            Console.WriteLine(distance + "km");
 
             var geoServerPerformance = new PerformanceBenchmark(GeoServerDataIds, GisType.GeoServer);
-            geoServerPerformance.TestPerformance(InitialNumberOfRuns, NumberOfRuns, IterationPerRun);
+//            geoServerPerformance.TestPerformance(InitialNumberOfRuns, NumberOfRuns, IterationPerRun);
 
             var mongoGisPerformance = new PerformanceBenchmark(MongoDbVectorFiles, GisType.MongoDb);
 //            mongoGisPerformance.TestPerformance(InitialNumberOfRuns, NumberOfRuns, IterationPerRun);
@@ -72,7 +72,7 @@ namespace GisPerformanceDotnetCore
 //            postGisVectorPerformance.TestPerformance(InitialNumberOfRuns, NumberOfRuns, IterationPerRun);
 
             var esriAsciiPerformance = new PerformanceBenchmark(AsciiFiles, GisType.EsriAscii);
-//            esriAsciiPerformance.TestPerformance(InitialNumberOfRuns, NumberOfRuns, IterationPerRun);
+            esriAsciiPerformance.TestPerformance(InitialNumberOfRuns, NumberOfRuns, IterationPerRun);
         }
     }
 }

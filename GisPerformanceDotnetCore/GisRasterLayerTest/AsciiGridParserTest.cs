@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using GisRasterLayer;
+﻿using System.IO;
 using GisRasterLayer.util;
 using Xunit;
 
@@ -26,13 +23,10 @@ namespace GisRasterLayerTest
             Assert.Equal(10, parser.CellSize);
             Assert.Equal(-9999, parser.NoDataValue);
 
-            var data = new Dictionary<Tuple<int, int>, double>
+            var data = new double[,]
             {
-                {new Tuple<int, int>(0, 0), 1},
-                {new Tuple<int, int>(0, 2), 3},
-                {new Tuple<int, int>(1, 0), 4},
-                {new Tuple<int, int>(1, 1), 5},
-                {new Tuple<int, int>(1, 2), 6}
+                {1, -9999, 3},
+                {4, 5, 6}
             };
             Assert.Equal(data, parser.Data);
         }
