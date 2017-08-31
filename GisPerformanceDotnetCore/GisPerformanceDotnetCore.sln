@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetTopologySuiteDotnetCore"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GisRasterLayer", "GisRasterLayer\GisRasterLayer.csproj", "{E66139D6-FD7F-4F40-BD5B-8FF912F5DF9B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GisRasterLayerTest", "GisRasterLayerTest\GisRasterLayerTest.csproj", "{5B1C4ECC-7F83-4E7C-9C29-FF691B480243}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{E66139D6-FD7F-4F40-BD5B-8FF912F5DF9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E66139D6-FD7F-4F40-BD5B-8FF912F5DF9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E66139D6-FD7F-4F40-BD5B-8FF912F5DF9B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5B1C4ECC-7F83-4E7C-9C29-FF691B480243}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B1C4ECC-7F83-4E7C-9C29-FF691B480243}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B1C4ECC-7F83-4E7C-9C29-FF691B480243}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B1C4ECC-7F83-4E7C-9C29-FF691B480243}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

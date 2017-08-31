@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using GisRasterLayer.util;
@@ -7,21 +8,26 @@ namespace GisRasterLayer
 {
     public class AsciiGridParser
     {
-        private int NumberOfColumns { get; set; }
+        public int NumberOfColumns { get; set; }
 
-        private int NumberOfRows { get; set; }
+        public int NumberOfRows { get; set; }
 
-        private double XLowerLeftCorner { get; set; }
+        public double XLowerLeftCorner { get; set; }
 
-        private double YLowerLeftCorner { get; set; }
+        public double YLowerLeftCorner { get; set; }
 
-        private double CellSize { get; set; }
+        public double CellSize { get; set; }
 
-        private int NoDataValue { get; set; }
+        public int NoDataValue { get; set; }
 
-        private double[][] Data { get; set; }
+        public IDictionary<Tuple<int, int>, double> Data { get; set; }
 
 
+        /// <summary>
+        /// Parses an Esri Ascii Grid file into RAM and and allows querying.
+        /// This was created since DotSpatial is not .NET Core compatible
+        /// </summary>
+        /// <param name="path">Path to the .asc file.</param>
         public AsciiGridParser(string path)
         {
             using (var file = File.OpenText(path))
@@ -29,6 +35,88 @@ namespace GisRasterLayer
                 ParseMetadata(file);
                 ParseData(file);
             }
+        }
+
+        /// <summary>
+        /// Retrieves a pixel value at a position.
+        /// </summary>
+        /// <param name="coord">The x and y coordinate of the pixel.</param>
+        /// <returns>The value of the pixel.</returns>
+        public double GetValue(Coordinate coord)
+        {
+            if (coord.X < 0 || coord.X >= NumberOfColumns || coord.Y < 0 || coord.Y >= NumberOfRows)
+            {
+                return NoDataValue;
+            }
+
+            var tuple = new Tuple<int, int>(coord.Y, coord.X);
+
+            return Data.TryGetValue(tuple, out double value) ? value : NoDataValue;
+        }
+
+        /// <summary>
+        /// Retrieves a pixel value at a position from GPS.
+        /// </summary>
+        /// <param name="gps">A Gps position for the desired pixel.</param>
+        /// <returns>The value of the pixel.</returns>
+        public double GetValueFromGps(Gps gps)
+        {
+            if (gps.Longitude < XLowerLeftCorner || gps.Longitude > XLowerLeftCorner + NumberOfColumns * CellSize ||
+                gps.Latitude < YLowerLeftCorner || gps.Latitude > YLowerLeftCorner + NumberOfRows * CellSize)
+            {
+                return NoDataValue;
+            }
+
+            var coordinate = GetFieldFromGps(gps);
+
+            return GetValue(coordinate);
+        }
+
+        /// <summary>
+        /// Retrieves the Metadata of the file.
+        /// </summary>
+        /// <returns>Metadata as string.</returns>
+        public string GetMetadata()
+        {
+            return "ncols " + NumberOfColumns +
+                   "\nnrows " + NumberOfRows +
+                   "\nxllcorner " + XLowerLeftCorner +
+                   "\nyllcorner " + YLowerLeftCorner +
+                   "\ncellsize " + CellSize +
+                   "\nnodata_value " + NoDataValue;
+        }
+
+        /// <summary>
+        /// Retrieves the data of the file.
+        /// </summary>
+        /// <returns>Data as a string.</returns>
+        public string GetData()
+        {
+            var str = "";
+            for (var row = 0; row < NumberOfRows; row++)
+            {
+                for (var column = 0; column < NumberOfColumns; column++)
+                {
+                    str += GetValue(new Coordinate(column, row)) + " ";
+                }
+                str = str.Trim();
+
+                if (row < NumberOfRows - 1)
+                {
+                    str += "\n";
+                }
+            }
+
+            return str;
+        }
+
+        /// <summary>
+        /// Retrieves Metadata & Data of the file.
+        /// </summary>
+        /// <returns>Matadata & Data as string.</returns>
+        public override string ToString()
+        {
+            return GetMetadata() + "\n" + GetData();
         }
 
         private void ParseMetadata(TextReader file)
@@ -64,7 +152,6 @@ namespace GisRasterLayer
                 else
                 {
                     throw new FormatException("No valid metadata field in: " + line);
-                    
                 }
             }
         }
@@ -75,7 +162,8 @@ namespace GisRasterLayer
             {
                 ParseMetadata(file);
             }
-            Data = new double[NumberOfColumns][];
+
+            Data = new Dictionary<Tuple<int, int>, double>();
 
             for (var row = 0; row < NumberOfRows; row++)
             {
@@ -86,37 +174,13 @@ namespace GisRasterLayer
 
                 for (var column = 0; column < NumberOfColumns; column++)
                 {
-                    if (Data[column] == null)
+                    var tuple = new Tuple<int, int>(row, column);
+                    if (Math.Abs(line[column] - NoDataValue) > 0.00001)
                     {
-                        Data[column] = new double[NumberOfRows];
+                        Data.Add(tuple, line[column]);
                     }
-
-                    Data[column][NumberOfRows - 1 - row] = line[column];
                 }
             }
-        }
-
-        public double GetValue(Coordinate coord)
-        {
-            if (coord.X < 0 || coord.X >= NumberOfColumns || coord.Y < 0 || coord.Y >= NumberOfRows)
-            {
-                return NoDataValue;
-            }
-
-            return Data[coord.X][coord.Y];
-        }
-
-        public double GetValueFromGps(Gps gps)
-        {
-            if (gps.Longitude < XLowerLeftCorner || gps.Longitude > XLowerLeftCorner + NumberOfColumns * CellSize ||
-                gps.Latitude < YLowerLeftCorner || gps.Latitude > YLowerLeftCorner + NumberOfRows * CellSize)
-            {
-                return NoDataValue;
-            }
-
-            var coordinate = GetFieldFromGps(gps);
-
-            return GetValue(coordinate);
         }
 
         private Coordinate GetFieldFromGps(Gps gps)
@@ -125,41 +189,6 @@ namespace GisRasterLayer
             var y = (int) ((gps.Latitude - YLowerLeftCorner) / CellSize);
 
             return new Coordinate(x, y);
-        }
-
-        public string GetMetadata()
-        {
-            return "ncols " + NumberOfColumns +
-                   "\nnrows " + NumberOfRows +
-                   "\nxllcorner " + XLowerLeftCorner +
-                   "\nyllcorner " + YLowerLeftCorner +
-                   "\ncellsize " + CellSize +
-                   "\nnodata_value " + NoDataValue;
-        }
-
-        public string GetData()
-        {
-            var str = "";
-            for (var row = 0; row < NumberOfRows; row++)
-            {
-                for (var column = 0; column < NumberOfColumns; column++)
-                {
-                    str += Data[column][row] + " ";
-                }
-                str = str.Trim();
-
-                if (row < NumberOfRows - 1)
-                {
-                    str += "\n";
-                }
-            }
-
-            return str;
-        }
-
-        public override string ToString()
-        {
-            return GetMetadata() + "\n" + GetData();
         }
     }
 }
