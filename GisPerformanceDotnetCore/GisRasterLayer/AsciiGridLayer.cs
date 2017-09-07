@@ -1,24 +1,25 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using GisRasterLayer.util;
 
-namespace GisRasterLayer.util
+namespace GisRasterLayer
 {
-    public class AsciiGridParser
+    public class AsciiGridLayer
     {
-        public int NumberOfColumns { get; set; }
+        private int NumberOfColumns { get; set; }
 
-        public int NumberOfRows { get; set; }
+        private int NumberOfRows { get; set; }
 
-        public double XLowerLeftCorner { get; set; }
+        private double XLowerLeftCorner { get; set; }
 
-        public double YLowerLeftCorner { get; set; }
+        private double YLowerLeftCorner { get; set; }
 
-        public double CellSize { get; set; }
+        private double CellSize { get; set; }
 
-        public int NoDataValue { get; set; }
+        private int NoDataValue { get; set; }
 
-        public double[,] Data { get; set; }
+        private double[,] Data { get; set; }
 
 
         /// <summary>
@@ -26,7 +27,7 @@ namespace GisRasterLayer.util
         /// This was created since DotSpatial is not .NET Core compatible
         /// </summary>
         /// <param name="path">Path to the .asc file.</param>
-        public AsciiGridParser(string path)
+        public AsciiGridLayer(string path)
         {
             using (var file = File.OpenText(path))
             {

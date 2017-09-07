@@ -2,13 +2,12 @@
 
 namespace GisRasterLayer.util
 {
-
-    public class Gps
+    public abstract class Gps
     {
         public double Longitude { get; }
         public double Latitude { get; }
 
-        public Gps(double longitude, double latitude)
+        protected Gps(double longitude, double latitude)
         {
             if (longitude < -180 || longitude > 180)
             {

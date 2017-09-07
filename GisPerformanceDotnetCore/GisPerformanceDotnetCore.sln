@@ -5,11 +5,15 @@ VisualStudioVersion = 12.0.0.0
 MinimumVisualStudioVersion = 10.0.0.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GisPerformanceDotnetCore", "GisPerformanceDotnetCore\GisPerformanceDotnetCore.csproj", "{1039D0A8-3D5D-46DD-B64D-29FE89FEC502}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetTopologySuiteDotnetCore", "NetTopologySuiteDotnetCore\NetTopologySuiteDotnetCore.csproj", "{1F32ED68-B3C5-48AF-869C-A3A66ABE9720}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GisRasterLayer", "GisRasterLayer\GisRasterLayer.csproj", "{E66139D6-FD7F-4F40-BD5B-8FF912F5DF9B}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GisRasterLayerTest", "GisRasterLayerTest\GisRasterLayerTest.csproj", "{5B1C4ECC-7F83-4E7C-9C29-FF691B480243}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NTS", "NTS\NTS.csproj", "{B24C67FB-665B-4036-8A90-A72580A54963}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GisVectorLayerTest", "GisVectorLayerTest\GisVectorLayerTest.csproj", "{919054A2-4ADD-4AC1-BF42-41D7D8F7181C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GisVectorLayer", "GisVectorLayer\GisVectorLayer.csproj", "{EA4C44EE-13A1-4927-B4FE-B85795857E32}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GisRasterLayer", "GisRasterLayer\GisRasterLayer.csproj", "{AE247115-33EF-4A3D-AD2C-384966F31213}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,18 +25,26 @@ Global
 		{1039D0A8-3D5D-46DD-B64D-29FE89FEC502}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1039D0A8-3D5D-46DD-B64D-29FE89FEC502}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1039D0A8-3D5D-46DD-B64D-29FE89FEC502}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1F32ED68-B3C5-48AF-869C-A3A66ABE9720}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1F32ED68-B3C5-48AF-869C-A3A66ABE9720}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1F32ED68-B3C5-48AF-869C-A3A66ABE9720}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1F32ED68-B3C5-48AF-869C-A3A66ABE9720}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E66139D6-FD7F-4F40-BD5B-8FF912F5DF9B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E66139D6-FD7F-4F40-BD5B-8FF912F5DF9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E66139D6-FD7F-4F40-BD5B-8FF912F5DF9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E66139D6-FD7F-4F40-BD5B-8FF912F5DF9B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5B1C4ECC-7F83-4E7C-9C29-FF691B480243}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5B1C4ECC-7F83-4E7C-9C29-FF691B480243}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5B1C4ECC-7F83-4E7C-9C29-FF691B480243}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5B1C4ECC-7F83-4E7C-9C29-FF691B480243}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B24C67FB-665B-4036-8A90-A72580A54963}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B24C67FB-665B-4036-8A90-A72580A54963}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B24C67FB-665B-4036-8A90-A72580A54963}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B24C67FB-665B-4036-8A90-A72580A54963}.Release|Any CPU.Build.0 = Release|Any CPU
+		{919054A2-4ADD-4AC1-BF42-41D7D8F7181C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{919054A2-4ADD-4AC1-BF42-41D7D8F7181C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{919054A2-4ADD-4AC1-BF42-41D7D8F7181C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{919054A2-4ADD-4AC1-BF42-41D7D8F7181C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EA4C44EE-13A1-4927-B4FE-B85795857E32}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA4C44EE-13A1-4927-B4FE-B85795857E32}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA4C44EE-13A1-4927-B4FE-B85795857E32}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA4C44EE-13A1-4927-B4FE-B85795857E32}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AE247115-33EF-4A3D-AD2C-384966F31213}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE247115-33EF-4A3D-AD2C-384966F31213}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE247115-33EF-4A3D-AD2C-384966F31213}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE247115-33EF-4A3D-AD2C-384966F31213}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

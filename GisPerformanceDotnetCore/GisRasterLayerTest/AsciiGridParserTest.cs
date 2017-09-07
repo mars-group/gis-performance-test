@@ -1,5 +1,5 @@
 ﻿using System.IO;
-using GisRasterLayer.util;
+using GisPerformanceDotnetCore.util;
 using Xunit;
 
 namespace GisRasterLayerTest
@@ -43,6 +43,7 @@ namespace GisRasterLayerTest
         public void getValue_CoordinateInsideRaster_value()
         {
             var parser = new AsciiGridParser(ExistingFile);
+            var parserCellSize = parser.CellSize;
 
             Assert.Equal(1, parser.GetValue(new Coordinate(0, 0)));
         }

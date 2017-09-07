@@ -9,6 +9,10 @@
     <PackageReference Include="xunit.runner.visualstudio" Version="2.2.0" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\GisPerformanceDotnetCore\GisPerformanceDotnetCore.csproj">
+      <Project>{1039D0A8-3D5D-46DD-B64D-29FE89FEC502}</Project>
+      <Name>GisPerformanceDotnetCore</Name>
+    </ProjectReference>
     <ProjectReference Include="..\GisRasterLayer\GisRasterLayer.csproj">
     </ProjectReference>
   </ItemGroup>

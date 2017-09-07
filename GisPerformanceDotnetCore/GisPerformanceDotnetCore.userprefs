@@ -1,10 +1,6 @@
 ﻿<Properties StartupConfiguration="{1039D0A8-3D5D-46DD-B64D-29FE89FEC502}|Default" NuGet.AddPackagesDialog.IncludePrerelease="True">
   <MonoDevelop.Ide.ItemProperties.GisPerformanceDotnetCore PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="GisPerformanceDotnetCore/Program.cs">
-    <Files>
-      <File FileName="GisPerformanceDotnetCore/Program.cs" Line="1" Column="1" />
-    </Files>
-  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workbench />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
