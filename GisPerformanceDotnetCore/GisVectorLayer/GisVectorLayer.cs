@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
-using GeoAPI.Geometries;
 using NetTopologySuite.Features;
 using NetTopologySuite.IO;
 
@@ -10,28 +8,42 @@ namespace GisVectorLayer
 {
     public class GisVectorLayer
     {
-        public readonly IFeature[] Features;
+        private readonly FeatureCollection _featureCollection;
+
+        public Collection<IFeature> Features => _featureCollection.Features;
 
         public GisVectorLayer(string filename)
         {
             if (!File.Exists(filename))
             {
-                Console.WriteLine("File does not exist!");
-                return;
+                throw new FileNotFoundException(filename + " does not exist!");
             }
 
             var file = File.OpenText(filename);
             var geoJson = file.ReadToEnd();
 
             var reader = new GeoJsonReader();
-            var featureCollection = reader.Read<FeatureCollection>(geoJson);
+            _featureCollection = reader.Read<FeatureCollection>(geoJson);
 
-            Features = featureCollection.Features.ToArray();
+            if (Features.Count < 1)
+            {
+                throw new FileLoadException("No Features were found while parsing the GIS file.");
+            }
         }
 
-        public bool Intersects(IGeometry geometry)
+        public bool Intersects(IFeature feature)
         {
-            return Features.Any(feature => feature.Geometry.Intersects(geometry));
+            return Features.Any(f => f.Geometry.Intersects(feature.Geometry));
+        }
+
+        public bool IsInside(IFeature feature)
+        {
+            return Features.Any(f => f.Geometry.Contains(feature.Geometry));
+        }
+
+        public bool Overlaps(IFeature feature)
+        {
+            return Features.Any(f => f.Geometry.Overlaps(feature.Geometry));
         }
     }
 }
