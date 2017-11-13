@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using NetTopologySuite.Features;
@@ -9,7 +10,6 @@ namespace GisVectorLayer
     public class GisVectorLayer
     {
         private readonly FeatureCollection _featureCollection;
-
         public Collection<IFeature> Features => _featureCollection.Features;
 
         public GisVectorLayer(string filename)
@@ -33,6 +33,7 @@ namespace GisVectorLayer
 
         public bool Intersects(IFeature feature)
         {
+            Console.WriteLine("type: " + _featureCollection.Type);
             return Features.Any(f => f.Geometry.Intersects(feature.Geometry));
         }
 

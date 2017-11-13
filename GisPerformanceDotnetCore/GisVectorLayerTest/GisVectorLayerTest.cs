@@ -1,6 +1,7 @@
 using System.IO;
 using GisVectorLayer.util;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace GisVectorLayerTest
 {
@@ -8,6 +9,12 @@ namespace GisVectorLayerTest
     {
         private static readonly string ParkBorder = Path.Combine("res", "2016_kruger_national_park.json");
         private static readonly string AgentPaths = Path.Combine("res", "paths.json");
+        private readonly ITestOutputHelper _output;
+
+        public GisVectorLayerTest(ITestOutputHelper output)
+        {
+            _output = output;
+        }
 
         [Fact]
         public void GisVectorLayerTest_valid()
@@ -32,6 +39,13 @@ namespace GisVectorLayerTest
             var agentPaths = new GisVectorLayer.GisVectorLayer(AgentPaths);
 
             Assert.True(parkBorder.Intersects(agentPaths.Features[1]));
+
+//            var attributeTable = new AttributesTable {{"id", 1}};
+
+//            _output.WriteLine("Attributes:" + agentPaths.Features[0].Attributes);
+            
+//            Assert.Equal(agentPaths.Features[0].Attributes, attributeTable);
+//            _output.WriteLine("attributes: " + parkBorder.Features[0].Attributes.Count);
         }
 
         [Fact]
